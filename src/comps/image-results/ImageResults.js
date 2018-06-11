@@ -7,10 +7,23 @@ import  Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 class ImageResults extends Component {
+  state = {
+    open: false,
+    currentImage: ''
+  }
 
+
+handleOpen  = (img) => {
+  this.setState({open: true, currentImage: img});
+
+}
+handleClose  = () => {
+  this.setState({open: false});
+
+}
   render() {
     let imageListContent;
-    const {images} = this.props; 
+    const {images} = this.props;
 
     if(images){
     imageListContent = (
@@ -25,7 +38,8 @@ class ImageResults extends Component {
                   </span>
                 }
                 actionIcon = {
-                  <IconButton>
+                  <IconButton
+                      onClick = {() => this.handleOpen(img.largeImageURL)}>
                     <ZoomIn color = "white"/>
                   </IconButton>
                 }
@@ -39,9 +53,22 @@ class ImageResults extends Component {
     imageListContent = null; //put a spinner here or a modal
   }
 
+//create an array of button options to show inside the dialog modal. in this case we are only showing one close button
+  const actions = [
+    <FlatButton label="close" primary = {true} onClick = {this.handleClose}/>
+  ]
     return (
       <div>
         {imageListContent}
+        <Dialog
+            actions = {actions}
+            modal = "true"
+            open = {this.state.open}
+            onRequestClose = {this.handleClose}
+          >
+            <img src = {this.state.currentImage} style = {{wdith: '50%'}} />
+
+        </Dialog>
       </div>
     );
   }
