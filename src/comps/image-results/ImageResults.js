@@ -53,6 +53,9 @@ handleClose  = () => {
     imageListContent = null; //put a spinner here or a modal
   }
 
+
+
+
 //create an array of button options to show inside the dialog modal. in this case we are only showing one close button
   const actions = [
     <FlatButton label="close" primary = {true} onClick = {this.handleClose}/>
@@ -66,7 +69,7 @@ handleClose  = () => {
             open = {this.state.open}
             onRequestClose = {this.handleClose}
           >
-            <img src = {this.state.currentImage} style = {{wdith: '50%'}} />
+            <img src = {this.state.currentImage} style = {{width: '100%'}} />
 
         </Dialog>
       </div>
